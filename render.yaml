@@ -1,7 +1,7 @@
 services:
-  # Backend API do projeto clonado
+  # Backend API do bingx-trading-bot-V1
   - type: web
-    name: bingx-trading-bot-clone-backend
+    name: bingx-trading-bot-V1-backend
     env: node
     rootDir: ./server
     plan: starter
@@ -26,15 +26,15 @@ services:
       - key: DEFAULT_POSITION_SIZE
         value: "100"
       - key: FRONTEND_URL
-        value: https://bingx-trading-bot-clone-frontend.onrender.com
+        value: https://bingx-trading-bot-V1-frontend.onrender.com
       - key: REDIS_URL
         sync: false
       - key: AUTO_START_BOT
         value: "false"
-        
-  # Frontend do projeto clonado
+
+  # Frontend do bingx-trading-bot-V1
   - type: web
-    name: bingx-trading-bot-clone-frontend
+    name: bingx-trading-bot-V1-frontend
     env: static
     rootDir: ./client
     buildCommand: npm install && npm run build
@@ -43,15 +43,15 @@ services:
       # API routes - preserve /api prefix when proxying to backend
       - type: rewrite
         source: /api/*
-        destination: https://bingx-trading-bot-clone-backend.onrender.com/api/*
+        destination: https://bingx-trading-bot-V1-backend.onrender.com/api/*
       # WebSocket route
       - type: rewrite
         source: /ws
-        destination: https://bingx-trading-bot-clone-backend.onrender.com/ws
+        destination: https://bingx-trading-bot-V1-backend.onrender.com/ws
       # Health check
       - type: rewrite
         source: /health
-        destination: https://bingx-trading-bot-clone-backend.onrender.com/health
+        destination: https://bingx-trading-bot-V1-backend.onrender.com/health
       # SPA fallback
       - type: rewrite
         source: /*
